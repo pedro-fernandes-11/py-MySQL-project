@@ -1,5 +1,7 @@
 import pymysql as sql
 
+# check_table.py is going to show the current data in table tb_form
+
 connection = sql.connect(
     host='localhost',
     user='root',
