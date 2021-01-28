@@ -1,5 +1,7 @@
 from tkinter import *
+from tkinter import messagebox
 import pymysql as sql
+
 
 connection = sql.connect(
     host='localhost',
@@ -35,15 +37,20 @@ class Form:
         btn_submit.grid(row=2, columnspan=2, pady="20")
 
         def get_data():
-            name = input_name.get()
-            email = input_email.get()
-            print(f"Name: {name} \nEmail: {email}")
+            name = input_name.get().capitalize()
+            email = input_email.get().lower()
 
-            cursor.execute("INSERT INTO tb_form(name, email) VALUES (%s, %s)", (name, email))
-            connection.commit()
+            if '@' in email and '.com' in email:
+                print(f"Name: {name} \nEmail: {email}")
 
-            input_name.delete(0, END)
-            input_email.delete(0, END)
+                cursor.execute("INSERT INTO tb_form(name, email) VALUES (%s, %s)", (name, email))
+                connection.commit()
+
+                input_name.delete(0, END)
+                input_email.delete(0, END)
+
+            else:
+                messagebox.showwarning(title='Warning', message="Invalid email")
 
         form_layout.mainloop()
 
