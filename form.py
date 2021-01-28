@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import pymysql as sql
 
+# form.py is generates a tkinter form, get given data from user and then insert that data into tb_form
 
 connection = sql.connect(
     host='localhost',
